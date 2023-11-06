@@ -1,0 +1,91 @@
+==20181== Memcheck, a memory error detector
+==20181== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==20181== Using Valgrind-3.19.0 and LibVEX; rerun with -h for copyright info
+==20181== Command: ./main
+==20181== Parent PID: 20149
+==20181== 
+==20181== Invalid write of size 1
+==20181==    at 0x109360: MyString_ns::MyString::MyString(char const*) (in /home/etoandruwa/Desktop/C++/MyStrings/build/main)
+==20181==    by 0x1091D7: main (in /home/etoandruwa/Desktop/C++/MyStrings/build/main)
+==20181==  Address 0x4d750c1 is 0 bytes after a block of size 1 alloc'd
+==20181==    at 0x4840F2F: operator new(unsigned long) (vg_replace_malloc.c:422)
+==20181==    by 0x109305: MyString_ns::MyString::MyString(char const*) (in /home/etoandruwa/Desktop/C++/MyStrings/build/main)
+==20181==    by 0x1091D7: main (in /home/etoandruwa/Desktop/C++/MyStrings/build/main)
+==20181== 
+==20181== Invalid write of size 1
+==20181==    at 0x109393: MyString_ns::MyString::MyString(char const*) (in /home/etoandruwa/Desktop/C++/MyStrings/build/main)
+==20181==    by 0x1091D7: main (in /home/etoandruwa/Desktop/C++/MyStrings/build/main)
+==20181==  Address 0x4d750c7 is 6 bytes after a block of size 1 alloc'd
+==20181==    at 0x4840F2F: operator new(unsigned long) (vg_replace_malloc.c:422)
+==20181==    by 0x109305: MyString_ns::MyString::MyString(char const*) (in /home/etoandruwa/Desktop/C++/MyStrings/build/main)
+==20181==    by 0x1091D7: main (in /home/etoandruwa/Desktop/C++/MyStrings/build/main)
+==20181== 
+==20181== Invalid read of size 1
+==20181==    at 0x109589: MyString_ns::MyString::print() const (in /home/etoandruwa/Desktop/C++/MyStrings/build/main)
+==20181==    by 0x1094D5: MyString_ns::MyString::print_data() const (in /home/etoandruwa/Desktop/C++/MyStrings/build/main)
+==20181==    by 0x1091E3: main (in /home/etoandruwa/Desktop/C++/MyStrings/build/main)
+==20181==  Address 0x4d750c1 is 0 bytes after a block of size 1 alloc'd
+==20181==    at 0x4840F2F: operator new(unsigned long) (vg_replace_malloc.c:422)
+==20181==    by 0x109305: MyString_ns::MyString::MyString(char const*) (in /home/etoandruwa/Desktop/C++/MyStrings/build/main)
+==20181==    by 0x1091D7: main (in /home/etoandruwa/Desktop/C++/MyStrings/build/main)
+==20181== 
+==20181== Mismatched free() / delete / delete []
+==20181==    at 0x484475B: operator delete[](void*) (vg_replace_malloc.c:1103)
+==20181==    by 0x1093E8: MyString_ns::MyString::~MyString() (in /home/etoandruwa/Desktop/C++/MyStrings/build/main)
+==20181==    by 0x1091F4: main (in /home/etoandruwa/Desktop/C++/MyStrings/build/main)
+==20181==  Address 0x4d750c0 is 0 bytes inside a block of size 1 alloc'd
+==20181==    at 0x4840F2F: operator new(unsigned long) (vg_replace_malloc.c:422)
+==20181==    by 0x109305: MyString_ns::MyString::MyString(char const*) (in /home/etoandruwa/Desktop/C++/MyStrings/build/main)
+==20181==    by 0x1091D7: main (in /home/etoandruwa/Desktop/C++/MyStrings/build/main)
+==20181== 
+==20181== 
+==20181== HEAP SUMMARY:
+==20181==     in use at exit: 0 bytes in 0 blocks
+==20181==   total heap usage: 3 allocs, 3 frees, 73,729 bytes allocated
+==20181== 
+==20181== All heap blocks were freed -- no leaks are possible
+==20181== 
+==20181== ERROR SUMMARY: 14 errors from 4 contexts (suppressed: 0 from 0)
+==20181== 
+==20181== 1 errors in context 1 of 4:
+==20181== Mismatched free() / delete / delete []
+==20181==    at 0x484475B: operator delete[](void*) (vg_replace_malloc.c:1103)
+==20181==    by 0x1093E8: MyString_ns::MyString::~MyString() (in /home/etoandruwa/Desktop/C++/MyStrings/build/main)
+==20181==    by 0x1091F4: main (in /home/etoandruwa/Desktop/C++/MyStrings/build/main)
+==20181==  Address 0x4d750c0 is 0 bytes inside a block of size 1 alloc'd
+==20181==    at 0x4840F2F: operator new(unsigned long) (vg_replace_malloc.c:422)
+==20181==    by 0x109305: MyString_ns::MyString::MyString(char const*) (in /home/etoandruwa/Desktop/C++/MyStrings/build/main)
+==20181==    by 0x1091D7: main (in /home/etoandruwa/Desktop/C++/MyStrings/build/main)
+==20181== 
+==20181== 
+==20181== 1 errors in context 2 of 4:
+==20181== Invalid write of size 1
+==20181==    at 0x109393: MyString_ns::MyString::MyString(char const*) (in /home/etoandruwa/Desktop/C++/MyStrings/build/main)
+==20181==    by 0x1091D7: main (in /home/etoandruwa/Desktop/C++/MyStrings/build/main)
+==20181==  Address 0x4d750c7 is 6 bytes after a block of size 1 alloc'd
+==20181==    at 0x4840F2F: operator new(unsigned long) (vg_replace_malloc.c:422)
+==20181==    by 0x109305: MyString_ns::MyString::MyString(char const*) (in /home/etoandruwa/Desktop/C++/MyStrings/build/main)
+==20181==    by 0x1091D7: main (in /home/etoandruwa/Desktop/C++/MyStrings/build/main)
+==20181== 
+==20181== 
+==20181== 6 errors in context 3 of 4:
+==20181== Invalid read of size 1
+==20181==    at 0x109589: MyString_ns::MyString::print() const (in /home/etoandruwa/Desktop/C++/MyStrings/build/main)
+==20181==    by 0x1094D5: MyString_ns::MyString::print_data() const (in /home/etoandruwa/Desktop/C++/MyStrings/build/main)
+==20181==    by 0x1091E3: main (in /home/etoandruwa/Desktop/C++/MyStrings/build/main)
+==20181==  Address 0x4d750c1 is 0 bytes after a block of size 1 alloc'd
+==20181==    at 0x4840F2F: operator new(unsigned long) (vg_replace_malloc.c:422)
+==20181==    by 0x109305: MyString_ns::MyString::MyString(char const*) (in /home/etoandruwa/Desktop/C++/MyStrings/build/main)
+==20181==    by 0x1091D7: main (in /home/etoandruwa/Desktop/C++/MyStrings/build/main)
+==20181== 
+==20181== 
+==20181== 6 errors in context 4 of 4:
+==20181== Invalid write of size 1
+==20181==    at 0x109360: MyString_ns::MyString::MyString(char const*) (in /home/etoandruwa/Desktop/C++/MyStrings/build/main)
+==20181==    by 0x1091D7: main (in /home/etoandruwa/Desktop/C++/MyStrings/build/main)
+==20181==  Address 0x4d750c1 is 0 bytes after a block of size 1 alloc'd
+==20181==    at 0x4840F2F: operator new(unsigned long) (vg_replace_malloc.c:422)
+==20181==    by 0x109305: MyString_ns::MyString::MyString(char const*) (in /home/etoandruwa/Desktop/C++/MyStrings/build/main)
+==20181==    by 0x1091D7: main (in /home/etoandruwa/Desktop/C++/MyStrings/build/main)
+==20181== 
+==20181== ERROR SUMMARY: 14 errors from 4 contexts (suppressed: 0 from 0)
