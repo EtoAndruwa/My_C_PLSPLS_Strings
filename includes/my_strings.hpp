@@ -13,6 +13,12 @@ namespace MyString_ns // start of namespace MyString_ns
             MyString(const char* const str_ptr);
             ~MyString();
 
+            void operator ++ (); // works
+            void operator -- (); // works
+            bool operator == (MyString& rhs) const; // works
+            MyString operator + (const MyString& rhs) const;
+            void operator = (const MyString& rhs); // works
+
             void print_data() const;
             void print() const;
             size_t size() const;
@@ -21,9 +27,9 @@ namespace MyString_ns // start of namespace MyString_ns
 
         private: 
             size_t m_size;
-            char* m_string_ptr;
-            char* m_begin;
-            char* m_end;
+            char*  m_string_ptr;
+            char*  m_begin;
+            char*  m_end;
 
             class EXC_ERR_NEW{}; // must be implemented
     };
@@ -31,7 +37,5 @@ namespace MyString_ns // start of namespace MyString_ns
     size_t get_str_size(const char* str_ptr);
 
 } // end of namespace MyString_ns
-
-
 
 #endif

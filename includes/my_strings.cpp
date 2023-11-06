@@ -1,6 +1,6 @@
 #include "my_strings.hpp"
 
-MyString_ns::MyString::MyString()
+MyString_ns::MyString::MyString() // ok
 {
     m_size       = 0;
     m_string_ptr = nullptr;
@@ -18,8 +18,6 @@ MyString_ns::MyString::MyString(const char* str_ptr)
     #ifdef DEBUG
         std::cout << "MyString(const char* const str_ptr) constructor called\n";
     #endif
-    m_begin = m_string_ptr;
-    m_end   = m_string_ptr + m_size + 1; 
 
     m_string_ptr = new char(m_size + 1);    
     if (m_string_ptr == nullptr)
@@ -28,12 +26,15 @@ MyString_ns::MyString::MyString(const char* str_ptr)
         // here must be exception
     }
 
-    for (size_t i = 0; i < m_size + 1; i++)
+    for (size_t i = 0; i <= m_size; i++)
     {
         m_string_ptr[i] = *str_ptr;
         str_ptr++;
     }
+    
     m_string_ptr[m_size + 1] = '\0';
+    m_begin = m_string_ptr;
+    m_end   = m_string_ptr + m_size + 1; 
 };
 
 MyString_ns::MyString::~MyString()
@@ -44,6 +45,10 @@ MyString_ns::MyString::~MyString()
 
     if (m_string_ptr != nullptr)
     {
+        m_begin = nullptr;
+        m_end   = nullptr;
+        m_size  = -1;     
+
         delete [] m_string_ptr;
         m_string_ptr = nullptr;
     }
@@ -64,10 +69,12 @@ void MyString_ns::MyString::print_data() const
     {
         std::cout << "string: nullptr\n";
     }
-    std::cout << "=========================================s==\n";
+    std::cout << "m_begin: " << (void*)m_begin << "\n";
+    std::cout << "m_end: " << (void*)m_end << "\n"; 
+    std::cout << "===========================================\n";
 }
 
-size_t MyString_ns::MyString::size() const
+size_t MyString_ns::MyString::size() const // ok
 {
     return m_size;
 }
@@ -102,4 +109,106 @@ char* MyString_ns::MyString::end() const // ok
 {
     return m_end;
 };
+
+void MyString_ns::MyString::operator++()
+{
+    for (size_t i = 0; i < m_size; i++)
+    {
+        m_string_ptr[i]++;
+    }
+}
+
+void MyString_ns::MyString::operator--()
+{
+    for (size_t i = 0; i < m_size; i++)
+    {
+        m_string_ptr[i]--;
+    }
+}
+
+bool MyString_ns::MyString::operator==(MyString& rhs) const
+{
+    if (m_size != rhs.m_size)
+    {
+        return false;
+    }
+    else
+    {
+        for (size_t i = 0; i <= m_size; i++)
+        {
+            if (m_string_ptr[i] != rhs.m_string_ptr[i])
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
+
+MyString_ns::MyString MyString_ns::MyString::operator+(const MyString_ns::MyString &rhs) const
+{
+    MyString_ns::MyString temp;
+    temp.m_size = m_size + rhs.m_size;
+    
+    temp.m_string_ptr = new char(temp.m_size + 1);
+    if (temp.m_string_ptr == nullptr)
+    {
+        std::cout << "EXCEPTION: error occured when tried to new()\n";
+        // here must be exception
+    }
+    else
+    {
+        temp.m_begin = temp.m_string_ptr;
+        temp.m_end   = temp.m_string_ptr + temp.m_size + 1;
+
+        size_t i_temp = 0;
+        for (size_t i = 0; i <= m_size; i++, i_temp++)
+        {
+            temp.m_string_ptr[i_temp] = m_string_ptr[i];
+        }   
+
+        for (size_t i = 0; i <= rhs.m_size; i++, i_temp++)
+        {
+            temp.m_string_ptr[i_temp] = rhs.m_string_ptr[i];
+        }
+
+        temp.m_string_ptr[temp.m_size + 1] = '\0';
+
+        return temp;
+    }
+}
+
+void MyString_ns::MyString::operator=(const MyString& rhs)
+{
+    delete [] m_string_ptr;
+
+    m_size = rhs.m_size;
+
+    if (rhs.m_string_ptr != nullptr)
+    {
+        m_string_ptr = new char(m_size + 1);
+
+        if (m_string_ptr == nullptr)
+        {
+            std::cout << "EXCEPTION: error occured when tried to new()\n";
+            // here must be exception
+        }
+
+        for (size_t i = 0; i <= m_size; i++)
+        {
+            m_string_ptr[i] = rhs.m_string_ptr[i];
+        }
+
+        m_string_ptr[m_size + 1] = '\0';
+        m_begin = m_string_ptr;
+        m_end   = m_string_ptr + m_size + 1; 
+    }
+    else
+    {
+        m_string_ptr = nullptr;
+        m_end        = nullptr;
+        m_begin      = nullptr;
+    }
+}
 
